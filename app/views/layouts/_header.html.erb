@@ -1,0 +1,24 @@
+<nav class="navbar navbar-default navbar-fixed-top" style="background-color:lightgray; text-align: left; color: black;">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <ul class="navbar-brand navbar-nav">
+        <li class="nav navbar-nav"><%= link_to "Tempest Results Home", static_pages_home_path %></li>
+      </ul>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="nav navbar-nav"><%= link_to "Neutron Api Results", neutron_api_index_path %></li>
+        <!--<li><a href="neutron_">Neutron Api Results</a></li> -->
+        <li><a href="scenario-results">Basic Scenario Results</a></li>
+        <li><a href="ipv6-results">IPV6 Results</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+

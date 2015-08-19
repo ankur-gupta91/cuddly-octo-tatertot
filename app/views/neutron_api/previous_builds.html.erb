@@ -1,0 +1,64 @@
+
+
+<div class="container-fluid">
+  <div class="col-sm-3 col-md-2 sidebar" style="background-color: lightsteelblue;">
+    <ul class="nav nav-sidebar">
+      <li class="active"><%= link_to "Latest Build", neutron_api_index_path%><span class="sr-only">(current)</span></li>
+      <li><%= link_to "Latest Logs", neutron_api_latest_log_path %></li>
+      <li><%= link_to "Previous Builds", neutron_api_previous_builds_path%></li>
+
+    </ul>
+  </div>
+
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h2 class="page-header">Previous Builds (zip)</h2>
+
+    <div id="neutronTarget">
+
+   <!--   <%=
+          $var = Dir.entries('/home/ankur/apishare').select {|entry| File.directory? File.join('/home/ankur/apishare', entry) and !(entry=='.' || entry=='..')}
+      %> -->
+      <table class="table" style="margin-top: 60px;" border="2px">
+          <thead>
+            <tr>
+              <td></td>
+              <td><b>Build number</b></td>
+              <td><b># Failed tests</b></td>
+            </tr>
+          </thead>
+          <tbody>
+
+                <% Dir.glob("/home/ankur/apishare/******") do |icon| %>
+              <tr>
+                    <td>
+                        <%=
+                           $latest = Dir.glob("/home/ankur/apishare/*").max_by {|f| File.mtime(f)}
+
+                           image_tag 'folder.png' , class: 'image-responsive' , style: 'height:40px; width: 50px; z-index: -10; margin-bottom:20px; margin-top:5px;'
+                        %>
+                    </td>
+                    <td>
+                        <%=
+                            link_to icon.gsub(/\D/,''), neutron_api_downloadpreviousbuild_path(:location => icon)
+                        %>
+                    </td>
+                    <td>
+                      <%=
+                          count = 0
+                          file = Dir.glob(icon + "/*.summary").join("")
+                          f = File.open(file, "r")
+                          while(line = f.gets)
+                             count = count + 1
+                          end
+                          count
+                      %>
+                    </td>
+                <% end %>
+               </tr>
+           </tbody>
+       </table>
+
+    </div>
+  </div>
+
+</div>

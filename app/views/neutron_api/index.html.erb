@@ -1,0 +1,25 @@
+
+<div class="container-fluid">
+    <div class="col-sm-3 col-md-2 sidebar" style="background-color: lightsteelblue;">
+      <ul class="nav nav-sidebar">
+        <li class="active"><%= link_to "Latest Build", neutron_api_index_path%><span class="sr-only">(current)</span></li>
+        <li><%= link_to "Latest Logs", neutron_api_latest_log_path %></li>
+        <li><%= link_to "Previous Builds", neutron_api_previous_builds_path%></li>
+      </ul>
+    </div>
+
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <h2 class="page-header">Neutron Api Results</h2>
+      <div id="neutronTarget">
+
+
+      <%=
+           $dir = Dir.glob("/home/ankur/apishare/*").max_by {|f| File.mtime(f)};
+           FileUtils.cp($dir + "/results.html", "/home/ankur/jenkins-ci/app/views/neutron_api")
+      %>
+      <%= render :file => 'neutron_api/results.html' %>
+
+      </div>
+    </div>
+
+</div>

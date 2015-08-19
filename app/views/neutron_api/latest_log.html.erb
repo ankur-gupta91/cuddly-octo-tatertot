@@ -1,0 +1,36 @@
+
+
+<div class="container-fluid">
+  <div class="col-sm-3 col-md-2 sidebar" style="background-color: lightsteelblue;">
+    <ul class="nav nav-sidebar">
+      <li class="active"><%= link_to "Latest Build", neutron_api_index_path%><span class="sr-only">(current)</span></li>
+      <li><%= link_to "Latest Logs", neutron_api_latest_log_path %></li>
+      <li><%= link_to "Previous Builds", neutron_api_previous_builds_path%></li>
+
+    </ul>
+  </div>
+
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h2 class="page-header">Tempest Test Log
+
+    <%= link_to "Download Test Log", neutron_api_download_url , class: 'btn btn-primary', style: 'margin-left: 60px;'%>
+
+    <%= link_to "Download All Logs", neutron_api_downloadlogs_url, class: 'btn btn-primary', style: 'margin-left: 60px;'%>
+
+    </h2>
+    <div id="neutronTarget">
+
+      <%=
+          $dir = Dir.glob("/home/ankur/apishare/*").max_by {|f| File.mtime(f)};
+          FileUtils.cp($dir + "/full.txt"   , "/home/ankur/jenkins-ci/app/views/neutron_api")
+      %>
+
+      <%= file = File.open("/home/ankur/jenkins-ci/app/views/neutron_api/full.txt", "rb")
+          contents = file.read
+          render :text => simple_format(contents)
+      %>
+
+    </div>
+  </div>
+
+</div>
